@@ -119,3 +119,42 @@ footer {
     border-radius: 5px;
     font-size: 12px;
 }
+/* --- GIAO DIỆN DÀNH CHO MÁY TÍNH (Desktop) --- */
+@media (min-width: 768px) {
+    .container {
+        max-width: 900px; /* Cho phép nội dung rộng ra trên PC */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Chia sản phẩm thành 2 hoặc 3 cột thay vì 1 cột như điện thoại */
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 30px;
+        width: 100%;
+    }
+
+    /* Chỉnh lại Header cho sang trọng trên màn hình lớn */
+    header {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        text-align: left;
+        margin-bottom: 50px;
+    }
+
+    .logo img {
+        width: 150px;
+        height: 150px;
+    }
+
+    /* Các nút bấm dàn hàng ngang hoặc chia cột cho gọn */
+    .links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 100%;
+    }
+}

@@ -4,20 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miên Man Studio | Decor & 3D Printing</title>
+    
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-</head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<script src="https://unpkg.com/scrollreveal"></script>
-<script>
-    ScrollReveal().reveal('.card', { 
-        delay: 200, 
-        distance: '50px',
-        interval: 100,
-        origin: 'bottom' 
-    });
-    ScrollReveal().reveal('header', { delay: 100, origin: 'top', distance: '30px' });
-</script>
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+</head>
 <body>
     <div class="container">
         <header>
@@ -61,15 +54,27 @@
         </section>
 
         <nav class="links">
-    <a href="#" class="btn"><i class="fab fa-facebook-messenger"></i> &nbsp; Facebook</a>
-    <a href="#" class="btn"><i class="fas fa-shopping-bag"></i> &nbsp; Shopee</a>
-    <a href="#" class="btn"><i class="fab fa-tiktok"></i> &nbsp; TikTok</a>
-    <a href="#" class="btn"><i class="fas fa-comment-dots"></i> &nbsp; Zalo Tư Vấn</a>
-</nav>
+            <a href="#" class="btn"><i class="fab fa-facebook-messenger"></i> &nbsp; Facebook</a>
+            <a href="#" class="btn"><i class="fas fa-shopping-bag"></i> &nbsp; Shopee</a>
+            <a href="#" class="btn"><i class="fab fa-tiktok"></i> &nbsp; TikTok</a>
+            <a href="#" class="btn"><i class="fas fa-comment-dots"></i> &nbsp; Zalo Tư Vấn</a>
+        </nav>
 
         <footer>
             <p>Cảm ơn bạn đã mang Miên Man về nhà ❤️</p>
         </footer>
     </div>
+
+    <script>
+        ScrollReveal().reveal('.card', { 
+            delay: 200, 
+            distance: '50px',
+            interval: 150, // Tăng nhẹ để nhìn hiệu ứng "rượt đuổi" giữa các card rõ hơn
+            origin: 'bottom',
+            duration: 1000 // Tăng thời gian chạy animation cho mượt
+        });
+        ScrollReveal().reveal('header', { delay: 100, origin: 'top', distance: '30px' });
+        ScrollReveal().reveal('.links', { delay: 400, origin: 'bottom', distance: '20px' });
+    </script>
 </body>
 </html>

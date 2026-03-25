@@ -21,36 +21,54 @@
             <p class="tagline">Decor & 3D Printing Lab</p>
         </header>
 
-        <section class="products-grid">
-            <div class="card">
-                <img src="https://via.placeholder.com/400x500?text=Den+Decor" alt="Sản phẩm 1">
-                <div class="card-info">
-                    <span>Handcrafted</span>
-                    <h3>Đèn Decor In 3D</h3>
-                    <p>250.000đ</p>
-                    <a href="#" class="buy-now">Khám phá</a>
-                </div>
-            </div>
+        <section class="products-grid" id="product-container">
+    <p style="text-align: center; grid-column: 1/-1;">Đang tải bộ sưu tập...</p>
+</section>
 
-            <div class="card">
-                <img src="https://via.placeholder.com/400x500?text=Den+Ngu" alt="Sản phẩm 2">
-                <div class="card-info">
-                    <span>Limited</span>
-                    <h3>Đèn Ngủ 3D Miên Man</h3>
-                    <p>250.000đ</p>
-                    <a href="#" class="buy-now">Khám phá</a>
-                </div>
-            </div>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
+<script>
+  // Cấu hình Firebase của bạn (Lấy trong Project Settings)
+  const firebaseConfig = {
+    databaseURL: "const firebaseConfig = {
+  apiKey: "AIzaSyBnrAgcfiB4FbWVPZbtdqUEGxPe1H5-c9Y",
+  authDomain: "mien-man.firebaseapp.com",
+  projectId: "mien-man",
+  storageBucket: "mien-man.firebasestorage.app",
+  messagingSenderId: "63266368634",
+  appId: "1:63266368634:web:9a606371a46b45e52b9fc3",
+  measurementId: "G-K11ZFF1CCM"
+};" 
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // Lấy dữ liệu sản phẩm
+  const productContainer = document.getElementById('product-container');
+
+  db.ref('products').on('value', (snapshot) => {
+    const data = snapshot.val();
+    productContainer.innerHTML = ''; // Xóa chữ "Đang tải"
+
+    for (let id in data) {
+        const item = data[id];
+        productContainer.innerHTML += `
             <div class="card">
-                <img src="https://via.placeholder.com/400x500?text=Chau+Cay" alt="Sản phẩm 3">
+                <img src="${item.image}" alt="${item.name}">
                 <div class="card-info">
-                    <span>Captain P2S Series</span>
-                    <h3>Chậu Cây Geometric</h3>
-                    <p>180.000đ</p>
-                    <a href="#" class="buy-now">Khám phá</a>
+                    <span>${item.tag || 'Handcrafted'}</span>
+                    <h3>${item.name}</h3>
+                    <p>${item.price.toLocaleString()}đ</p>
+                    <a href="${item.link || '#'}" class="buy-now">Khám phá</a>
                 </div>
             </div>
+        `;
+    }
+    // Chạy lại hiệu ứng ScrollReveal sau khi load xong nhựa
+    ScrollReveal().reveal('.card', { interval: 200, origin: 'bottom', distance: '30px' });
+  });
+</script>
         </section>
 
         <nav class="links">

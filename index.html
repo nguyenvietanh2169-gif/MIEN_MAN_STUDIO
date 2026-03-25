@@ -22,53 +22,7 @@
         </header>
 
         <section class="products-grid" id="product-container">
-    <p style="text-align: center; grid-column: 1/-1;">Đang tải bộ sưu tập...</p>
-</section>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
-<script>
-  // Cấu hình Firebase của bạn (Lấy trong Project Settings)
-  const firebaseConfig = {
-    databaseURL: "const firebaseConfig = {
-  apiKey: "AIzaSyBnrAgcfiB4FbWVPZbtdqUEGxPe1H5-c9Y",
-  authDomain: "mien-man.firebaseapp.com",
-  projectId: "mien-man",
-  storageBucket: "mien-man.firebasestorage.app",
-  messagingSenderId: "63266368634",
-  appId: "1:63266368634:web:9a606371a46b45e52b9fc3",
-  measurementId: "G-K11ZFF1CCM"
-};" 
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-
-  // Lấy dữ liệu sản phẩm
-  const productContainer = document.getElementById('product-container');
-
-  db.ref('products').on('value', (snapshot) => {
-    const data = snapshot.val();
-    productContainer.innerHTML = ''; // Xóa chữ "Đang tải"
-
-    for (let id in data) {
-        const item = data[id];
-        productContainer.innerHTML += `
-            <div class="card">
-                <img src="${item.image}" alt="${item.name}">
-                <div class="card-info">
-                    <span>${item.tag || 'Handcrafted'}</span>
-                    <h3>${item.name}</h3>
-                    <p>${item.price.toLocaleString()}đ</p>
-                    <a href="${item.link || '#'}" class="buy-now">Khám phá</a>
-                </div>
-            </div>
-        `;
-    }
-    // Chạy lại hiệu ứng ScrollReveal sau khi load xong nhựa
-    ScrollReveal().reveal('.card', { interval: 200, origin: 'bottom', distance: '30px' });
-  });
-</script>
+            <p style="text-align: center; grid-column: 1/-1;">Đang tải bộ sưu tập...</p>
         </section>
 
         <nav class="links">
@@ -83,16 +37,60 @@
         </footer>
     </div>
 
-    <script>
-        const sr = ScrollReveal({
-            duration: 1500,
-            distance: '30px',
-            reset: false
-        });
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-        sr.reveal('header', { origin: 'top' });
-        sr.reveal('.card', { origin: 'bottom', interval: 200 });
-        sr.reveal('.links', { origin: 'bottom', delay: 500 });
+    <script>
+      // Cấu hình Firebase đã sửa lỗi cú pháp
+      const firebaseConfig = {
+        apiKey: "AIzaSyBnrAgcfiB4FbWVPZbtdqUEGxPe1H5-c9Y",
+        authDomain: "mien-man.firebaseapp.com",
+        databaseURL: "https://mien-man-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "mien-man",
+        storageBucket: "mien-man.firebasestorage.app",
+        messagingSenderId: "63266368634",
+        appId: "1:63266368634:web:9a606371a46b45e52b9fc3",
+        measurementId: "G-K11ZFF1CCM"
+      };
+
+      // Khởi tạo Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
+
+      // Lấy dữ liệu sản phẩm
+      const productContainer = document.getElementById('product-container');
+
+      db.ref('products').on('value', (snapshot) => {
+        const data = snapshot.val();
+        productContainer.innerHTML = ''; 
+
+        if (!data) {
+            productContainer.innerHTML = '<p style="text-align: center; grid-column: 1/-1; opacity: 0.5;">Chưa có sản phẩm nào.</p>';
+            return;
+        }
+
+        for (let id in data) {
+            const item = data[id];
+            productContainer.innerHTML += `
+                <div class="card">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="card-info">
+                        <span>${item.tag || 'Handcrafted'}</span>
+                        <h3>${item.name}</h3>
+                        <p>${Number(item.price).toLocaleString()}đ</p>
+                        <a href="${item.link || '#'}" class="buy-now">Khám phá</a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Kích hoạt hiệu ứng sau khi render xong
+        ScrollReveal().reveal('.card', { interval: 150, origin: 'bottom', distance: '30px', duration: 1000 });
+      });
+
+      // Hiệu ứng cho header và links
+      ScrollReveal().reveal('header', { origin: 'top', duration: 1000 });
+      ScrollReveal().reveal('.links', { origin: 'bottom', delay: 500, duration: 1000 });
     </script>
 </body>
 </html>

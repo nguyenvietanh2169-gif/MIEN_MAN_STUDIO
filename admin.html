@@ -5,43 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý Miên Man Studio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body style="background: #fdfaf5; padding: 20px;">
-    <div style="max-width: 500px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-        <h2 style="text-align: center; margin-bottom: 20px;">Thêm sản phẩm mới</h2>
+<body style="background: #fdfaf5; padding: 20px; font-family: 'Montserrat', sans-serif;">
+    <div style="max-width: 500px; margin: 0 auto;">
         
-        <input type="text" id="pName" placeholder="Tên sản phẩm (Vd: Đèn Zodiac)" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd;">
-        <input type="number" id="pPrice" placeholder="Giá (Vd: 250000)" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd;">
-        <input type="text" id="pTag" placeholder="Tag (Vd: New, Best Seller)" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd;">
-        <input type="text" id="pImage" placeholder="Link ảnh (Dán link từ iPhone)" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd;">
-        <input type="text" id="pLink" placeholder="Link Shopee/Zalo" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd;">
-        
-        <button onclick="addProduct()" style="width:100%; padding:15px; background:#1a1a1a; color:#fff; border:none; cursor:pointer;">ĐĂNG BÁN NGAY</button>
-        
-        <div id="status" style="margin-top:15px; text-align:center; color: green;"></div>
+        <div style="background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px;">
+            <h2 style="text-align: center; margin-bottom: 25px; letter-spacing: 2px;">THÊM ĐỒ DECOR</h2>
+            
+            <input type="text" id="pName" placeholder="Tên sản phẩm (Vd: Đèn Miên Man)" style="width:100%; padding:15px; margin-bottom:15px; border:1px solid #eee; border-radius: 8px;">
+            <input type="number" id="pPrice" placeholder="Giá (Vd: 250000)" style="width:100%; padding:15px; margin-bottom:15px; border:1px solid #eee; border-radius: 8px;">
+            <input type="text" id="pTag" placeholder="Tag (Vd: New, Limited)" style="width:100%; padding:15px; margin-bottom:15px; border:1px solid #eee; border-radius: 8px;">
+            <input type="text" id="pImage" placeholder="Link ảnh từ GitHub/iPhone" style="width:100%; padding:15px; margin-bottom:15px; border:1px solid #eee; border-radius: 8px;">
+            <input type="text" id="pLink" placeholder="Link mua hàng (Shopee/Zalo)" style="width:100%; padding:15px; margin-bottom:15px; border:1px solid #eee; border-radius: 8px;">
+            
+            <button onclick="addProduct()" style="width:100%; padding:18px; background:#1a1a1a; color:#fff; border:none; border-radius: 8px; font-weight: 700; cursor:pointer; letter-spacing: 2px;">ĐĂNG BÁN NGAY</button>
+            <div id="status" style="margin-top:15px; text-align:center; color: #c5a47e; font-weight: 500;"></div>
+        </div>
+
+        <div style="background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <h3 style="margin-bottom: 20px;">Sản phẩm đang hiển thị</h3>
+            <div id="admin-product-list">
+                <p style="font-size: 0.9rem; opacity: 0.5;">Đang tải danh sách...</p>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
     <script>
-        const firebaseConfig = { databaseURL: "ĐƯỜNG_DẪN_DATABASE_CỦA_BẠN" };
+        const firebaseConfig = {
+            apiKey: "AIzaSyBnrAgcfiB4FbWVPZbtdqUEGxPe1H5-c9Y",
+            authDomain: "mien-man.firebaseapp.com",
+            databaseURL: "https://mien-man-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "mien-man",
+            storageBucket: "mien-man.firebasestorage.app",
+            messagingSenderId: "63266368634",
+            appId: "1:63266368634:web:9a606371a46b45e52b9fc3",
+            measurementId: "G-K11ZFF1CCM"
+        };
+
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
+        // Hàm Thêm Sản Phẩm
         function addProduct() {
             const name = document.getElementById('pName').value;
-            const price = parseInt(document.getElementById('pPrice').value);
+            const price = document.getElementById('pPrice').value;
             const tag = document.getElementById('pTag').value;
             const image = document.getElementById('pImage').value;
             const link = document.getElementById('pLink').value;
 
             if(name && price && image) {
-                db.ref('products').push({ name, price, tag, image, link });
-                document.getElementById('status').innerText = "Đã thêm thành công!";
-                // Xóa form
-                document.querySelectorAll('input').forEach(input => input.value = '');
+                db.ref('products').push({ name, price, tag, image, link })
+                .then(() => {
+                    document.getElementById('status').innerText = "Đã lên sóng thành công! ✨";
+                    document.querySelectorAll('input').forEach(input => input.value = '');
+                });
             } else {
-                alert("Vui lòng nhập đủ Tên, Giá và Ảnh!");
+                alert("Việt Anh ơi, nhớ điền Tên, Giá và Ảnh nhé!");
+            }
+        }
+
+        // Hàm Hiển thị & Xóa Sản Phẩm
+        const adminList = document.getElementById('admin-product-list');
+        db.ref('products').on('value', (snapshot) => {
+            const data = snapshot.val();
+            adminList.innerHTML = '';
+            if(!data) { adminList.innerHTML = 'Trống trơn luôn!'; return; }
+
+            for (let id in data) {
+                const item = data[id];
+                adminList.innerHTML += `
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; align-items: center;">
+                            <img src="${item.image}" style="width: 40px; height: 40px; border-radius: 4px; object-fit: cover; margin-right: 15px;">
+                            <div>
+                                <div style="font-weight: 500; font-size: 0.9rem;">${item.name}</div>
+                                <div style="font-size: 0.8rem; color: #888;">${Number(item.price).toLocaleString()}đ</div>
+                            </div>
+                        </div>
+                        <button onclick="deleteProduct('${id}')" style="background: none; border: none; color: #ff7675; cursor: pointer;">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+            }
+        });
+
+        function deleteProduct(id) {
+            if(confirm("Xóa món này khỏi kệ hàng nhé?")) {
+                db.ref('products/' + id).remove();
             }
         }
     </script>

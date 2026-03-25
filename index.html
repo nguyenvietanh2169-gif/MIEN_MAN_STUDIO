@@ -15,7 +15,7 @@
     <div class="container">
         <header>
             <div class="logo">
-                <img src="https://github.com/nguyenvietanh2169-gif/MIEN_MAN_STUDIO/blob/main/LOGO%20MIENMAN%20FULL%20.png?raw=true">
+                <img src="https://github.com/nguyenvietanh2169-gif/MIEN_MAN_STUDIO/blob/main/LOGO%20MIENMAN%20FULL%20.png?raw=true" alt="Miên Man Studio Logo">
             </div>
             <h1>MIÊN MAN <span class="studio">STUDIO</span></h1>
             <p class="tagline">Decor & 3D Printing Lab</p>
@@ -23,41 +23,41 @@
 
         <section class="products-grid">
             <div class="card">
-                <img src="https://via.placeholder.com/400x300?text=San+Pham+1" alt="Sản phẩm 1">
+                <img src="https://via.placeholder.com/400x500?text=Den+Decor" alt="Sản phẩm 1">
                 <div class="card-info">
-                    <span>Mới nhất</span>
+                    <span>Handcrafted</span>
                     <h3>Đèn Decor In 3D</h3>
-                    <p>Giá: 250k</p>
-                    <a href="#" class="buy-now">Mua ngay</a>
+                    <p>250.000đ</p>
+                    <a href="#" class="buy-now">Khám phá</a>
                 </div>
             </div>
 
             <div class="card">
-                <img src="https://via.placeholder.com/400x300?text=San+Pham+2" alt="Sản phẩm 2">
+                <img src="https://via.placeholder.com/400x500?text=Den+Ngu" alt="Sản phẩm 2">
                 <div class="card-info">
-                    <span>Hot</span>
+                    <span>Limited</span>
                     <h3>Đèn Ngủ 3D Miên Man</h3>
-                    <p>Giá: 250k</p>
-                    <a href="#" class="buy-now">Mua ngay</a>
+                    <p>250.000đ</p>
+                    <a href="#" class="buy-now">Khám phá</a>
                 </div>
             </div>
 
             <div class="card">
-                <img src="https://via.placeholder.com/400x300?text=San+Pham+3" alt="Sản phẩm 3">
+                <img src="https://via.placeholder.com/400x500?text=Chau+Cay" alt="Sản phẩm 3">
                 <div class="card-info">
-                    <span>Best Seller</span>
-                    <h3>Chậu Cây Captain P2S</h3>
-                    <p>Giá: 180k</p>
-                    <a href="#" class="buy-now">Mua ngay</a>
+                    <span>Captain P2S Series</span>
+                    <h3>Chậu Cây Geometric</h3>
+                    <p>180.000đ</p>
+                    <a href="#" class="buy-now">Khám phá</a>
                 </div>
             </div>
         </section>
 
         <nav class="links">
-            <a href="#" class="btn"><i class="fab fa-facebook-messenger"></i> &nbsp; Facebook</a>
-            <a href="#" class="btn"><i class="fas fa-shopping-bag"></i> &nbsp; Shopee</a>
-            <a href="#" class="btn"><i class="fab fa-tiktok"></i> &nbsp; TikTok</a>
-            <a href="#" class="btn"><i class="fas fa-comment-dots"></i> &nbsp; Zalo Tư Vấn</a>
+            <a href="#" class="btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+            <a href="#" class="btn"><i class="fas fa-shopping-cart"></i> Shopee</a>
+            <a href="#" class="btn"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="#" class="btn"><i class="fas fa-comment"></i> Zalo</a>
         </nav>
 
         <footer>
@@ -66,15 +66,15 @@
     </div>
 
     <script>
-        ScrollReveal().reveal('.card', { 
-            delay: 200, 
-            distance: '50px',
-            interval: 150, // Tăng nhẹ để nhìn hiệu ứng "rượt đuổi" giữa các card rõ hơn
-            origin: 'bottom',
-            duration: 1000 // Tăng thời gian chạy animation cho mượt
+        const sr = ScrollReveal({
+            duration: 1500,
+            distance: '30px',
+            reset: false
         });
-        ScrollReveal().reveal('header', { delay: 100, origin: 'top', distance: '30px' });
-        ScrollReveal().reveal('.links', { delay: 400, origin: 'bottom', distance: '20px' });
+
+        sr.reveal('header', { origin: 'top' });
+        sr.reveal('.card', { origin: 'bottom', interval: 200 });
+        sr.reveal('.links', { origin: 'bottom', delay: 500 });
     </script>
 </body>
 </html>
